@@ -1,10 +1,7 @@
-import './App.css';
-import AWS from 'aws-sdk';
-
-
-
-const s3= new AWS.S3({
-  endpoint:"http://192.168.219.170:9000",
+var AWS = require('aws-sdk')
+var s3= new AWS.S3({
+  endpoint:"http://127.0.0.1:9000",
+  port:'9000',
   accessKeyId:'minio',
   secretAccessKey:'miniostorage',
   signatureVersion:'v4',
@@ -25,27 +22,8 @@ s3.listObjectsV2(
         contents.forEach((content) => {
             lists.push(content.Key); // "ex) content.Key => assets/images/1.png"
         });
+        console.log(lists);
     }
 );
 
 
-
-function App() {
- 
- 
-  return (
-    <div>
-      {lists.map((a)=>{
-        return(
-          <div>
-            {a}
-          </div>
-        )
-        })}
-    </div>
-
-
-  );
-}
-
-export default App;
