@@ -2,37 +2,28 @@ import React, {useState, useEffect} from "react";
 
 const Bucket = ({s3}) => {
     const [bucketList, setBucketList] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(false)
 
-    const getBucketLists = async () => {
-        const res = await s3.listBuckets().promise()
-        const buckets = res.Buckets
-        console.log(buckets)
-        setBucketList([...buckets])
+    const getBuckets = async () => {
+        try {
+            const { Buckets } = await s3.listBuckets().promise()
+            setBucketList(Buckets)
+        }
+        catch (err) {
+            setError(err)
+        }
     }
 
     useEffect(()=>{
-        s3.listBuckets((err, data) => {
-            if (err) {
-                setError(true)
-                return
-            }
-            setIsLoading(false)
-            setBucketList(data.Buckets)
-        })
+        getBuckets()
     }, [])
-
+    
     return(
-        <div>
-            hello world
-            <div>
-                {isLoading && "Loading"}
-                {!isLoading && 
-                    bucketList.map((item, key) => {
-                        <p key={key}>{item.Name}</p>
-                    })}
-            </div>
+        <div className="Bucket">
+            {
+                bucketList.map((item, key)=> <p key={key}>{item.Name}</p>)
+            }
         </div>
     )
 }
