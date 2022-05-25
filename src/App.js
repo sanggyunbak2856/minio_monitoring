@@ -3,12 +3,13 @@ import AWS from 'aws-sdk';
 import React from 'react';
 import Bucket from './components/Bucket';
 
-AWS.config.update({
-  accessKeyId: 'minioadmin',
-  secretAccessKey: 'minioadmin',
-})
 const s3 = new AWS.S3({
-  endpoint: 'http://192.168.0.22:9000',
+  endpoint: "http://192.168.0.22:9000",
+  port: "9000",
+  accessKeyId: "minioadmin",
+  secretAccessKey: "minioadmin",
+  signatureVersion: "v4",
+  s3ForcePathStyle:  true
 })
 
 function App() {
