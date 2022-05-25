@@ -1,7 +1,7 @@
 import './App.css';
 import AWS from 'aws-sdk';
 import React from 'react';
-import Bucket from './components/Bucket';
+import Buckets from './components/Buckets';
 
 const s3 = new AWS.S3({
   endpoint: "http://192.168.0.22:9000",
@@ -15,7 +15,7 @@ const s3 = new AWS.S3({
 function App() {
   return (
     <div className="App">
-      <Bucket s3={s3}/>
+      <Buckets s3={s3}/>
     </div>
   );
 }
