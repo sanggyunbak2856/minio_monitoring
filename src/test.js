@@ -8,6 +8,7 @@ var s3= new AWS.S3({
     s3ForcePathStyle:true
   })
   let lists = [];
+  let textlist=[];
   s3.listObjects(
       {
           Bucket: "test1"
@@ -18,7 +19,14 @@ var s3= new AWS.S3({
           }
           let contents = data.Contents;
           contents.forEach((content) => {
-              console.log(content.Key); // "ex) content.Key => assets/images/1.png"
+              lists.push(content.Key); // "ex) content.Key => assets/images/1.png"
           });
+          s3.getObject({Bucket:"test1", Key:"test.txt"},function(err,data){
+              if(err){
+                  console.log(err)
+              }
+              console.log(data.Body.toString())
+          })
+        
       }
   );
