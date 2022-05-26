@@ -2,6 +2,8 @@ import './App.css';
 import AWS from 'aws-sdk';
 import React from 'react';
 import Bucket from './components/Bucket';
+import BucketOper from './components/BucketOper';
+
 
 const s3 = new AWS.S3({
   endpoint: "http://10.0.2.7:9000",
@@ -14,9 +16,14 @@ const s3 = new AWS.S3({
 
 function App() {
   return (
+  <div>
     <div className="App">
       <Bucket s3={s3}/>
     </div>
+    <div className="App">
+      <BucketOper s3={s3}/> 
+    </div>
+  </div>
   );
 }
 

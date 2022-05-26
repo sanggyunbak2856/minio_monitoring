@@ -1,48 +1,19 @@
-import React, {useState, useEffect} from "react";
 
-const Content = ({s3}) => {
-    const [bucketList, setBucketList] = useState([])
-    const [objectList, setObjectList] = useState([])
-    const [ContentList, setContentList] = useState([])
-    const [selectedBucket, setSelectedBucket] = useState(undefined)
-    const [selectedObject, setSelectedObject] = useState(undefined)
-    const [error, setError]  = useState(undefined)
+AWS=require('aws-sdk')
 
+const s3 = new AWS.S3({
+    endpoint: "http://10.0.2.7:9000",
+    port: "9000",
+    accessKeyId: "minio",
+    secretAccessKey: "miniostorage",
+    signatureVersion: "v4",
+    s3ForcePathStyle:  true
+  })
 
-    const getListContent = async () => { // 버킷들 public 권한 가지고 있어야함
-        try {
-            console.log(selectedObject)
-            const params_obj = {
-                Bucket: 'test1',
-                Key: 'test.txt'
-            }
-            const res = await s3.getObject(params_obj).promise()
-            console.log(res.Body.toString())
-            setContentList(res.Body.toString())
-        }
-        catch (err) {
-            setError(err)
-            console.log(err)
-        }
-    }
-
-    const onClickHandler_obj = (item) => { // 클릭시 state에 버킷 설정
-        setSelectedObject(item.Name)
-    }
-
-    useEffect(()=>{
-        getListContent()
-    }, [])
-    
-    return(
-        <div className="Bucket">
-            {
-                
-                ContentList
-                
-            }
-        </div>
-    )
-}
-
-export default Content
+  var params={
+      Bucket:''
+  }
+  s3.createBucket(params,function(err,data){
+      if(err) console.log(err,err.stack);
+      else console.log(data)
+  })
