@@ -10,11 +10,11 @@ const s3 = new AWS.S3({
     s3ForcePathStyle:  true
   })
 
-  var params={
-      Bucket:'test1'
-  }
-  s3.headBucket(params,function(err,exists){
-      if(err) console.log(err);
-      if(exists) console.log("true")
-  })
-  
+  const params_obj = {
+    Bucket: 'test1',
+    Key: 'test.txt'
+}
+s3.getObject(params_obj,function(err,data){
+    if(err){console.log(err,err.stack)}
+    else console.log('success')
+})

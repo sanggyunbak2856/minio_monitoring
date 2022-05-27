@@ -6,6 +6,7 @@ const Bucket = ({s3}) => {
     const [Content, setContent] = useState([])
     const [selectedBucket, setSelectedBucket] = useState(undefined)
     const [selectedObject, setSelectedObject] = useState(undefined)
+    const [deleteButton, setdeleteButton] = useState(undefined)
     const [error, setError]  = useState(undefined)
 
     const getBuckets = async () => { // 버켓 리스트 가져오기
@@ -73,6 +74,43 @@ const Bucket = ({s3}) => {
     useEffect(()=>{
         getContent()
     }, [selectedObject])
+
+
+
+
+
+
+
+
+
+
+
+    const deleteObject = async () => { // 버킷들 public 권한 가지고 있어야함
+        try {
+            console.log(deleteButton)
+            const params_obj = {
+                Bucket: selectedBucket,
+                Key: deleteButton
+            }
+            await s3.deleteObject(params_obj,function(err,data){
+                if(err&&err.statusCode!=403){}
+                else alert('success')
+            }).promise()
+            }
+        catch (err) {
+            setError(err)
+            console.log(err)
+        }
+    }
+
+    const onClickHandler_obj_del = (item) => { // 클릭시 state에 버킷 설정
+        setdeleteButton(item.Key)
+    }
+
+    useEffect(()=>{
+        deleteObject()
+        getListObject()
+    }, [deleteButton])
     
 
 
@@ -97,9 +135,13 @@ const Bucket = ({s3}) => {
                     objectList.map((item, key) => 
                         <p
                             key={key}
-                            onClick={() => onClickHandler_obj(item)}
+                           
                         >
                             {item.Key}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button onClick={()=>onClickHandler_obj(item)}>content</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button onClick={()=>onClickHandler_obj_del(item)}>X</button>
                         </p>
                 )
                 :
