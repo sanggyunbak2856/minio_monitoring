@@ -74,6 +74,12 @@ const Bucket = ({s3}) => {
         getContent()
     }, [selectedObject])
     
+
+
+
+
+
+
     return(
         <div className="Bucket">
             {
