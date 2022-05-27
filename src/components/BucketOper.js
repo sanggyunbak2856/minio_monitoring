@@ -23,7 +23,7 @@ const BucketOper = ({s3}) => {
 
 
 
-    const makebucket = async () => { // 버킷들 public 권한 가지고 있어야함
+    const makebucket = async () => { 
         try {
             console.log(submitted)
             var params={
@@ -49,7 +49,7 @@ const BucketOper = ({s3}) => {
 
 
 
-    const removebucket = async () => { // 버킷들 public 권한 가지고 있어야함
+    const removebucket = async () => { 
         try {
             console.log(submitted_del)
             var params={
