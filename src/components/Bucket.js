@@ -1,11 +1,9 @@
-import React from "react"
+import React, {useState, useEffect} from "react";
 
-const Bucket = ({setSelectedBucket, item}) => {
-    return(
-        <div
-            onClick={()=>{setSelectedBucket(item.Name)}}
-        >
-            <p>{item.Name}</p>
+const Bucket = ({item}) => {
+    return (
+        <div>
+            {item.Name}
         </div>
     )
 }
