@@ -1,7 +1,8 @@
 import './App.css';
 import AWS from 'aws-sdk';
 import React from 'react';
-import Buckets from './components/Buckets';
+import FileMonitoring from './components/FileMonitoring';
+import ErrorDetection from './components/ErrorDetection';
 
 const s3 = new AWS.S3({
   endpoint: "http://192.168.0.22:9000",
@@ -15,7 +16,8 @@ const s3 = new AWS.S3({
 function App() {
   return (
     <div className="App">
-      <Buckets s3={s3}/>
+      <FileMonitoring s3={s3}/>
+      <ErrorDetection />
     </div>
   );
 }
