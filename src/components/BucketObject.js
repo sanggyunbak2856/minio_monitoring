@@ -1,9 +1,10 @@
 import React from "react"
 
-const BucketObject = ({item}) => {
+const BucketObject = ({item, setSelectedObject}) => {
     return(
         <div>
-            {item.Key}
+            <span>{item.Key}</span>
+            <button onClick={() => setSelectedObject(item.Key)}>delete</button>
         </div>
     )
 }

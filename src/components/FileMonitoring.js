@@ -7,6 +7,7 @@ const FileMonitoring = ({s3}) => {
     const [bucketList, setBucketList] = useState([])
     const [objectList, setObjectList] = useState([])
     const [selectedBucket, setSelectedBucket] = useState(undefined)
+    const [selectedObject, setSelectedObject] =  useState(undefined)
     const [error, setError]  = useState(undefined)
 
     const getBuckets = async () => { // 버켓 리스트 가져오기
@@ -39,9 +40,29 @@ const FileMonitoring = ({s3}) => {
         }
     }
 
-    useEffect(()=>{
+    const deleteObject = async () => {
+        try {
+            const params = {
+                Bucket: selectedBucket,
+                Key: selectedObject
+            }
+            console.log("selectedBucket : ", selectedBucket, "selectedObject : ", selectedObject)
+            const res = await s3.deleteObject(params, (err, data) => console.log(data))
+        }
+        catch (err) {
+            setError(err)
+            console.log(err)
+        }
+    }
+
+    useEffect(()=>{ // 버킷 클릭시 오브젝트 리스트 가져오기
         getListObject()
     }, [selectedBucket])
+
+    useEffect(() => {
+        deleteObject()
+        getListObject()
+    }, [selectedObject])
     
     return(
         <div className="Monitoring">
@@ -53,7 +74,7 @@ const FileMonitoring = ({s3}) => {
                         <Bucket key={key} item={item} setSelectedBucket={setSelectedBucket}/>)
                     :
                     objectList.map((item, key) => 
-                        <BucketObject key={key} item={item} />
+                        <BucketObject key={key} item={item} setSelectedObject={setSelectedObject}/>
                     )
                 }
             </div>
