@@ -66,7 +66,6 @@ const FileMonitoring = ({s3}) => {
                 Key: selectedObject
             }
             const res = await s3.getObject(params).promise()
-            console.log(res)
             const bodyRes = res.Body.toString()
             const messages = bodyRes.match(/\{(.*?)\}/g)
             setContents(messages)
