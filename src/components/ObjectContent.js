@@ -1,9 +1,11 @@
 import React from "react"
+import "../App.css"
 
-const ObjectContent = () => {
+const ObjectContent = ({contents}) => {
+
     return (
         <div className="ObjectContent">
-
+            {contents !== undefined && contents.toString()}
         </div>
     )
 }
