@@ -3,7 +3,7 @@ import '../App.css'
 
 const ErrorDetection = () => {
     return (
-        <div>
+        <div className="ErrorDetection">
             hello world
         </div>
     )

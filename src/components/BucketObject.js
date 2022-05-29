@@ -1,10 +1,15 @@
 import React from "react"
+import "../App.css"
 
-const BucketObject = ({item, setSelectedObject}) => {
+const BucketObject = ({item, setObjectForDelete, setSelectedObject}) => {
     return(
-        <div>
+        <div 
+            className="BucketObject"
+            onClick={() => setSelectedObject(item.Key)}
+        >
             <span>{item.Key}</span>
-            <button onClick={() => setSelectedObject(item.Key)}>delete</button>
+            <span>{item.LastModified.toString()}</span>
+            <button onClick={() => setObjectForDelete(item.Key)}>delete</button>
         </div>
     )
 }
