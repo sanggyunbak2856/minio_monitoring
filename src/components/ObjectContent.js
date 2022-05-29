@@ -5,7 +5,7 @@ const ObjectContent = ({contents}) => {
 
     return (
         <div className="ObjectContent">
-            {contents !== undefined && contents.toString()}
+            {contents?.toString()}
         </div>
     )
 }

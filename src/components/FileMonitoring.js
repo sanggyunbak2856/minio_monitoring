@@ -3,6 +3,7 @@ import Bucket from "./Bucket";
 import BucketObject from "./BucketObject";
 import ObjectContent from "./ObjectContent";
 import '../App.css'
+import ErrorDetection from "./ErrorDetection";
 
 const FileMonitoring = ({s3}) => {
     const [bucketList, setBucketList] = useState([])
@@ -65,8 +66,10 @@ const FileMonitoring = ({s3}) => {
                 Key: selectedObject
             }
             const res = await s3.getObject(params).promise()
-            setContents(res.Body)
             console.log(res)
+            const bodyRes = res.Body.toString()
+            const messages = bodyRes.match(/\{(.*?)\}/g)
+            setContents(messages)
         }
         catch (err) {
             setError(err)
@@ -92,6 +95,7 @@ const FileMonitoring = ({s3}) => {
     useEffect(() => {
         deleteObject()
         getListObject()
+        setContents(undefined)
     }, [objectForDelete])
 
     useEffect(() => {
@@ -124,6 +128,8 @@ const FileMonitoring = ({s3}) => {
             <hr></hr>
             <h1>File Contents</h1>
             <ObjectContent contents={contents}/>
+            <hr/>
+            <ErrorDetection contents={contents}/>
         </div>
     )
 }
