@@ -4,6 +4,8 @@ import '../App.css'
 const ErrorDetection = ({contents}) => {
     const [error, setError] = useState(false)
 
+    const FLAG = false // error 초기화 위해
+    
     const errorDetect = () => {
         console.log("contents : ", contents)
         contents?.forEach(m => {
@@ -16,9 +18,18 @@ const ErrorDetection = ({contents}) => {
                 if(i < 10 || i > 50) {
                     console.log("here")
                     setError(true)
+                    FLAG = true
+                    return
                 }
             })
+            if(FLAG == true) {
+                return
+            }
         });
+        if(FLAG == false) {
+            setError(false)
+            return
+        }
     }
 
     useEffect(()=>{
