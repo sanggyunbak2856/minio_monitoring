@@ -53,7 +53,8 @@ const ErrorDetection = ({contents}) => {
 
     return (
         <div className="ErrorDetection">
-            <h1 onClick={() => errorDetect()}>ErrorDetection</h1>
+            <h1>ErrorDetection</h1>
+            <button   onClick={() => errorDetect()}>Detect</button>
             <hr/>
             Low : <input 
                     onChange={e => onChangeLowBound(e)} 

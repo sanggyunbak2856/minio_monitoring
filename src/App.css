@@ -3,9 +3,25 @@
 }
 
 .Monitoring {
-    width: 100%;
+    width: 1200px;
+    height: 1200px;
     border: 1px solid black;
     margin: 10px;
+    padding: 10px;
+}
+
+.Bucket {
+    height: 300px;
+    border: 1px solid black;
+    overflow: scroll;
+    margin-top: 10px;
+    padding: 10px
+}
+
+.ObjectContent {
+    height: 300px;
+    border: 1px solid black;
+    overflow: scroll;
     padding: 10px;
 }
 
