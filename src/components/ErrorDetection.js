@@ -46,17 +46,12 @@ const ErrorDetection = ({contents}) => {
         setUpperBound(Number(e.target.value))
     }
 
-    useEffect(()=>{
-        console.log(lowBound, typeof lowBound)
-        console.log(upperBound, typeof upperBound)
-    }, [lowBound, upperBound])
-
     return (
         <div className="ErrorDetection">
             <h1>ErrorDetection</h1>
             <button   onClick={() => errorDetect()}>Detect</button>
             <hr/>
-            Low : <input 
+            Lower : <input 
                     onChange={e => onChangeLowBound(e)} 
                     type="number" 
                     value={lowBound}

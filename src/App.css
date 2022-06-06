@@ -22,7 +22,6 @@
     height: 300px;
     border: 1px solid black;
     overflow: scroll;
-    padding: 10px;
 }
 
 .BucketObject {
@@ -30,6 +29,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.BucketObject:hover {
+    cursor: pointer;
 }
 
 .ObjectContent {

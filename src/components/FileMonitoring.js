@@ -77,6 +77,7 @@ const FileMonitoring = ({s3}) => {
 
     const onClickBackButtonHandler = () => { // 첫페이지로 가기
         setSelectedBucket(undefined)
+        setContents(undefined)
         getBuckets()
     }
 
@@ -105,7 +106,7 @@ const FileMonitoring = ({s3}) => {
         <div className="Monitoring">
             <h1>File Monitoring</h1>
             <div className="button_wrapper">
-                <button onClick={() => onClickRefreshButtonHandler()}>refresh</button>
+                <button onClick={() => onClickRefreshButtonHandler()} style={{marginRight: "10px"}}>refresh</button>
                 <button onClick={() => onClickBackButtonHandler()}>return to bucket list</button>
             </div>
             <div className="Bucket">
