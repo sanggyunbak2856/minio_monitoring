@@ -17,7 +17,6 @@ function App() {
   return (
     <div className="App">
       <FileMonitoring s3={s3}/>
-      <ErrorDetection />
     </div>
   );
 }
